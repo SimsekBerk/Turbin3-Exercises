@@ -16,11 +16,17 @@ umi.use(mplTokenMetadata())
 const mint = generateSigner(umi);
 
 (async () => {
-    // let tx = ???
-    // let result = await tx.sendAndConfirm(umi);
-    // const signature = base58.encode(result.signature);
+    let tx = createNft(umi, {
+        mint,
+        name: "Ric's Rug",
+        symbol: "RIC",
+        uri: "https://arweave.net/-o92lw98_GZni0n5H1hJwZ71hJBNGedw6ERoiWAWr9o",
+        sellerFeeBasisPoints: percentAmount(7),
+    });
+    let result = await tx.sendAndConfirm(umi);
+    const signature = base58.encode(result.signature);
     
-    // console.log(`Succesfully Minted! Check out your TX here:\nhttps://explorer.solana.com/tx/${signature}?cluster=devnet`)
+    console.log(`Succesfully Minted! Check out your TX here:\nhttps://explorer.solana.com/tx/${signature}?cluster=devnet`)
 
     console.log("Mint Address: ", mint.publicKey);
 })();
