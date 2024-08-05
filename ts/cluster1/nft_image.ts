@@ -18,11 +18,15 @@ umi.use(signerIdentity(signer));
         //1. Load image
         //2. Convert image to generic file.
         //3. Upload image
+        const image = await readFile("/home/brk/Code/Solana/turbin3/Turbin3-Exercises/ts/cluster1/assets/generug.png");
+        const generic = createGenericFile(image, "rug", {
+            contentType: "image/png"
+        });
 
-        // const image = ???
+        const [URI] = await umi.uploader.upload([generic]);
 
-        // const [myUri] = ??? 
-        // console.log("Your image URI: ", myUri);
+        console.log("URI: ", URI);
+        // https://arweave.net/Ou7QSjf8KPncnlytEZTLnea5sPKFznJ3RmWZPmrg1Ak
     }
     catch(error) {
         console.log("Oops.. Something went wrong", error);
